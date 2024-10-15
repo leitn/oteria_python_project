@@ -1,0 +1,3 @@
+#!/home/ltn/Documents/Python/project/.venv/bin/python3
+from ldapdomaindump import convert
+convert.ldd2bloodhound()
