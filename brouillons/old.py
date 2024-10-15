@@ -17,7 +17,6 @@ def scan_ports(ip, start_port, end_port):
         sock.close()
     return open_ports
 
-ip_address = '193.186.4.124'
-open_ports = scan_ports(ip_address, 1, 1005)
-print(open_ports)
+ip_address = '127.0.0.1'
+open_ports = scan_ports(ip_address, 1, 65535)
 

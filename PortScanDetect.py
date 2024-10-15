@@ -3,10 +3,11 @@
 import logging
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
+from scapy.layers.inet import TCP, IP
 from impacket import ImpactDecoder, ImpactPacket
 import time
- 
-THRESHOLD = 15
+
+THRESHOLD = 50
 WINDOW = 5
 PORTS=[]
 class PacketHandler:
@@ -44,7 +45,7 @@ class PacketHandler:
         if counts >= THRESHOLD:
             self.scanners.add(src_ip)
             print(f"Scanner detected. The scanner originated from host {src_ip}.")
-            AllPorts = ','.join(map(str,PORTS))
+            AllPorts = '\n'.join(map(str,PORTS))
             print("Ports Scanned [",AllPorts,"]")
             quit()
  
