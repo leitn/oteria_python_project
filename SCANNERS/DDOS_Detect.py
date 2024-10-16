@@ -46,6 +46,5 @@ def main():
 	print("Waiting for a PING....\n")
 	sniff(prn=ddos_detect, filter="icmp", stop_filter=f_stopfilter)
 	
-
 if __name__ == "__main__":
     main()

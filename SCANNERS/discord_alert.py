@@ -30,7 +30,6 @@ def send_discord_alert(message, channel_select):
 		
 	data = {
         "content": message,  # Le message d'alerte
-        "Gigi": "Alerte Réseau",  # Nom d'utilisateur du bot qui enverra l'alerte
     }
 	response = requests.post(d_channel, json=data) #requête POST contenant le message à l'URL du Chan Discord. Le message est formaté en JSON.
 	if response.status_code == 204:  # Code de succès pour Discord
