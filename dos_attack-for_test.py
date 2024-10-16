@@ -4,10 +4,10 @@ from scapy.all import *
 from scapy.layers.inet import ICMP, IP
 
 
-dst_ip="185.91.90.40"
-n_ips = 5
+dst_ip="10.100.02.160"
+n_ips = 10
 threads = 2
-n_msg = 5
+n_msg = 150
 
 ips = []
 
