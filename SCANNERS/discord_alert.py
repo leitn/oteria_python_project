@@ -15,7 +15,7 @@ def chose_global(chan_select):
 	elif chan_select == 3:
 		d_chan = DISCORD_WEBHOOK_PSCAN
 	else:
-		d_chan = DISCORD_WEBHOOK_DDOS #CHANGER 
+		d_chan = 'erreur'
 	return (d_chan)
 
 def send_discord_alert(message, channel_select):
