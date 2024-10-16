@@ -14,7 +14,7 @@ SCAN_COUNT = 0
 
 
 def	f_stopfilter(pkt):
-	'''Interrompt le sniff dès qu'un scanning
+	'''Interrompt le sniff() dès qu'un scanning
         de port est détecté'''
 	msg = "Alerte : scanning de ports en court\n"
 	print(msg)
@@ -24,6 +24,20 @@ def	f_stopfilter(pkt):
 
     
 def portscan_detect(pkt):
+    '''
+        Surveille les paquets reçus avec sniff()
+        et envoie une alerte en cas de suspicion de scan
+        de ports en court.
+
+        Incrémente SCAN_COUNT et le reset à zéro toutes 
+        les WINDOW secondes. Si SCAN_COUNT dépasse un 
+        nombre définit dans THRESHOLD, met le booléen 
+        SCAN_BOOL à True, ce qui déclenche
+        f_stopfilter, qui envoie une alerte à un serveur
+        discord et note l'évènement dans un document
+        text de log. 
+        
+        '''
     global SCAN_BOOL
     global SCAN_COUNT
     global COMPARE_TIME
@@ -35,6 +49,8 @@ def portscan_detect(pkt):
     if(curr_time - COMPARE_TIME >= WINDOW): 
         SCAN_COUNT = 0 
         COMPARE_TIME = time.time() 
+    # Repère les synchronisations (SYN, flag 'S') du protocole TCP, indiquant que les paquets
+    # reçus vérifient que nos ports sont ouverts ou non.
     if TCP in pkt and pkt[TCP].flags == 'S': 
         SCAN_COUNT = SCAN_COUNT + 1
         print(f'Received PING n°{SCAN_COUNT}\n')
