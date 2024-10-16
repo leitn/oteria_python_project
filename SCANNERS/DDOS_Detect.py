@@ -24,7 +24,7 @@ def fill_log(str, pkt):
 		with open(f, 'a') as file:
 			file.write(f"[FROM : {pkt_addr} : {str}")
 			curr_time = time.time()
-			if (curr_time - START_TIME >= 86400): #Après 24h sans DDOS détécté, on efface les logs.
+			if (curr_time - START_TIME >= 86400): #Après 24h sans DDOS détecté, on efface les logs.
 				file.truncate(0)
 	else:
 		with open(f, 'a') as file:
