@@ -6,7 +6,7 @@ from discord_alert import *
 from my_logging import *
 	
 THRESHOLD = 50 #nombre de connexions maximales avant de sonner l'alarme
-WINDOW = 5 #le temps dans lequel ces connexio # Si il y a 3 ou plus tentatives en 30 secondes (correspondant à 5 tests SSH)ns doivent avoir lieu, en secondes
+WINDOW = 5 #le temps dans lequel ces connexions # Si il y a 3 ou plus tentatives en 30 secondes (correspondant à 5 tests SSH)ns doivent avoir lieu, en secondes
 DDOS_BOOL = False #Flag annonçant une attaque DDOS
 SCAN_BOOL = False #Flag annonçant un Scan de ports
 BRUTE_BOOL = False
@@ -20,7 +20,6 @@ cpt_test = {}
 def f_alarm(msg, chan_flag, pkt):
 	'''Fonction appelée par f_stopfilter
         Selon les attaques en cours, print un message d'erreur, remplit le logfile, et envoie une alrte discord'''
-	msg = "Alerte : scanning de ports en court\n"
 	print(msg)
 	fill_log(msg, pkt) 
 	send_discord_alert(msg, chan_flag)
@@ -33,9 +32,9 @@ def	f_stopfilter(pkt):
 	   Remplit le log avec les informations de l'attaque en court (Heure, IP...)
 	   Envoie une alerte discord'''
 	if DDOS_BOOL == True or SCAN_BOOL == True or BRUTE_BOOL:
-		if DDOS_BOOL == True and SCAN_BOOL == False:
+		if DDOS_BOOL == True:
 			f_alarm("Alerte : risque potentiel de DDOS\n", 1, pkt)
-		elif SCAN_BOOL == True and DDOS_BOOL == False:
+		elif SCAN_BOOL == True:
 			f_alarm("Alerte : scanning de ports en court\n", 3, pkt)
 		return (True)
 	else:
@@ -52,7 +51,7 @@ def detect_brute_force(pkt):
 		else:
 			cpt_test[src_ip].append(cur_time)  # Ajoute la nouvelle tentative pour cette IP
 			cpt_test[src_ip] = [t for t in cpt_test[src_ip] if cur_time - t <= 30] # On garde seulement les tentatives dans la dernière minute (30 secondes)
-			if len(cpt_test[src_ip]) == 6:  # Si il y a 3 ou plus tentatives en 30 secondes (correspondant à 5 tests SSH)
+			if len(cpt_test[src_ip]) == 6:  # Si il y a 3 ou plus tentatives en 30 secondes 
 				msg = f"[ALERTE] Potentielle attaque par force brute détectée de {src_ip} sur le port 22 !"
 				print(msg)
 				fill_log(msg, pkt)
@@ -131,7 +130,7 @@ def f_nids(pkt):
 		Sinon, on vérifie qu'il n'y ait ni de bruteforce ni de scanner de ports en cours'''
 	if ICMP in pkt:
 		ddos_detect(pkt)
-	elif TCP in pkt:
+	if TCP in pkt:
 		detect_brute_force(pkt)
 		portscan_detect(pkt)
 		
