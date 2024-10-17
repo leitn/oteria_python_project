@@ -2,6 +2,7 @@ from scapy.all import *
 from scapy.layers.inet import IP, TCP #Can be removed, it just allows VSCode to not flag an error on thos keywords
 import time
 from discord_alert import *
+from my_logging import *
 
 # Dictionnaire pour stocker le nombre de tentatives de connexion par IP source
 cpt_test = {}
