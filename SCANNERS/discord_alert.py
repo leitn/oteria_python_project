@@ -2,12 +2,14 @@
 
 import requests
 
-
+#liens vers les channels Discord visés via l'API de Discord
 DISCORD_WEBHOOK_DDOS = 'https://discord.com/api/webhooks/1296092623265726545/R7Baj9qBY-3O5km8_HVJ934HhmNmMi_Wj5zGLuzUtdhTEldOheYbUXOKh2RuDC6HXsDD'
 DISCORD_WEBHOOK_BRUTE_FORCE = 'https://discord.com/api/webhooks/1296094525055438920/i2qtcOeLi9TNlHqz5e_TJr-y4uZd30vsOruxP63LNwSS0eMHpoL4uTyD4upruE4SPFxh'
 DISCORD_WEBHOOK_PSCAN ='https://discord.com/api/webhooks/1296094641732452515/irHY_BZqH0PEW4E4oosfjvX7newp_envrNshoO32qcl34dgTjW3mWHIu-GL6PaZf6gGB'
 
 def chose_global(chan_select):
+	'''Fonction choisissant le lien discord vers lequel
+		l'alerte sera envoyée'''
 	if chan_select == 1:
 		d_chan = DISCORD_WEBHOOK_DDOS
 	elif chan_select == 2:
@@ -35,4 +37,4 @@ def send_discord_alert(message, channel_select):
 	if response.status_code == 204:  # Code de succès pour Discord
 		print("Alerte envoyée sur Discord.")
 	else:
-		print(f"Erreur lors de l'envoi de l'alerte : {response.status_code}")
+		print(f"Erreur lors de l'envoi de l'alerte : {response.status_code}") #si un développeur envoie un int en dehors de [1,3]
