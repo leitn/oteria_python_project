@@ -11,3 +11,6 @@
 [10/17/24:11:35:50] [IP : 10.100.10.190 ]: Alerte : scanning de ports en court
 [10/17/24:11:38:01] [IP : 10.100.10.190 ]: Alerte : scanning de ports en court
 [10/17/24:11:38:25] [IP : 10.100.11.167 ]: Alerte : risque potentiel de DDOS
+[10/17/24:11:57:55] [IP : 10.100.10.190 ]: Alerte : risque potentiel de DDOS
+[10/17/24:11:58:09] [IP : 10.100.10.190 ]: Alerte : scanning de ports en court
+[10/17/24:11:58:52] [IP : 10.100.10.190 ]: [ALERTE] Potentielle attaque par force brute détectée de 10.100.10.190 sur le port 22 !

@@ -31,7 +31,7 @@ def	f_stopfilter(pkt):
        Print sur la sortie standard un message d'informations
 	   Remplit le log avec les informations de l'attaque en court (Heure, IP...)
 	   Envoie une alerte discord'''
-	if DDOS_BOOL == True or SCAN_BOOL == True or BRUTE_BOOL:
+	if DDOS_BOOL == True or SCAN_BOOL == True or BRUTE_BOOL == True:
 		if DDOS_BOOL == True:
 			f_alarm("Alerte : risque potentiel de DDOS\n", 1, pkt)
 		elif SCAN_BOOL == True:
@@ -51,7 +51,7 @@ def detect_brute_force(pkt):
 		else:
 			cpt_test[src_ip].append(cur_time)  # Ajoute la nouvelle tentative pour cette IP
 			cpt_test[src_ip] = [t for t in cpt_test[src_ip] if cur_time - t <= 30] # On garde seulement les tentatives dans la dernière minute (30 secondes)
-			if len(cpt_test[src_ip]) == 6:  # Si il y a 3 ou plus tentatives en 30 secondes 
+			if len(cpt_test[src_ip]) == 6:  # Si il y a 2 ou plus tentatives en 30 secondes 
 				msg = f"[ALERTE] Potentielle attaque par force brute détectée de {src_ip} sur le port 22 !"
 				print(msg)
 				fill_log(msg, pkt)
